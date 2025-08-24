@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduBot Premium ULTRA - École Numérique SIL & CP 🌈✨</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        /* CSS ULTRA-ADAPTÉ AUX ENFANTS 4-8 ANS AVEC COULEURS DOUCES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif;
+            background: linear-gradient(45deg, 
+                #FFE5E5 0%, #E5F3FF 25%, #F0FFE5 50%, #FFF5E5 75%, #F5E5FF 100%
+            );
+            background-size: 300% 300%;
+            animation: gentleFlow 12s ease infinite;
+            min-height: 100vh;
+            color: #2C3E50;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gentleFlow {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 100%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 0%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particules douces flottantes */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.3) 2px, transparent 2px),
+                radial-gradient(circle at 80% 80%, rgba(173, 216, 230, 0.3) 3px, transparent 3px),
+                radial-gradient(circle at 40% 60%, rgba(255, 218, 185, 0.3) 2px, transparent 2px);
+            background-size: 150px 150px, 200px 200px, 180px 180px;
+            animation: softFloat 25s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes softFloat {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(180deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Splashscreen avec Robot Animé */
+        .splashscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            background: linear-gradient(135deg, #E8F5E8 0%, #F0F8FF 50%, #FFF0F5 100%);
+            transition: opacity 0.8s ease;
+        }
+
+        .splash-content {
+            text-align: center;
+            animation: gentleBounce 3s ease-in-out infinite;
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        .robot-container {
+            font-size: 8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            animation: robotDance 2s ease-in-out infinite;
+        }
+
+        @keyframes robotDance {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.05); }
+            50% { transform: rotate(-3deg) scale(1.03); }
+            75% { transform: rotate(3deg) scale(1.02); }
+        }
+
+        .robot-eyes {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            animation: robotBlink 3s ease-in-out infinite;
+        }
+
+        @keyframes robotBlink {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0; }
+        }
+
+        .splash-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FF6B9D, #4ECDC4, #45B7D1, #96CEB4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .splash-subtitle {
+            font-size: 1.5rem;
+            color: #34495E;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        /* Barre de progression centrée */
+        .progress-container {
+            width: 400px;
+            max-width: 90vw;
+            margin: 0 auto 2rem auto;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.1),
+                inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFB6C1, #87CEEB, #98FB98, #F0E68C);
+            background-size: 200% 100%;
+            border-radius: 25px;
+            width: 0%;
+            transition: width 0.4s ease;
+            animation: gentleProgress 3s linear infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes gentleProgress {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 0%; }
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #2C3E50;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Profile Selection */
+        .profile-selection {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 3rem 0;
+        }
+
+        .profile-welcome {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-welcome h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FF6B9D, #4ECDC4, #96CEB4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .profile-welcome p {
+            font-size: 1.3rem;
+            color: #34495E;
+            font-weight: 500;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .profile-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.8), 
+                rgba(255, 255, 255, 0.6)
+            );
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            animation: cardGentleFloat 4s ease-in-out infinite;
+        }
+
+        .profile-card:nth-child(1) { animation-delay: 0s; }
+        .profile-card:nth-child(2) { animation-delay: 1s; }
+        .profile-card:nth-child(3) { animation-delay: 2s; }
+        .profile-card:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes cardGentleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+
+        .profile-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: #4ECDC4;
+        }
+
+        .profile-avatar-large {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: avatarGentleBounce 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarGentleBounce {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.08) rotate(3deg); }
+        }
+
+        .profile-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #2C3E50;
+            font-weight: 700;
+        }
+
+        .profile-card p {
+            color: #34495E;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #7F8C8D;
+        }
+
+        .soft-rainbow-text {
+            background: linear-gradient(45deg, #FF6B9D, #4ECDC4, #96CEB4, #F7DC6F);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: softRainbow 4s ease infinite;
+            font-weight: 700;
+        }
+
+        @keyframes softRainbow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .new-profile {
+            border: 3px dashed #4ECDC4;
+            background: linear-gradient(145deg, rgba(78, 205, 196, 0.1), rgba(78, 205, 196, 0.05));
+            animation: newProfileGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes newProfileGlow {
+            0%, 100% { 
+                border-color: #4ECDC4;
+                box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+            }
+            50% { 
+                border-color: #FF6B9D;
+                box-shadow: 0 0 20px rgba(255, 107, 157, 0.4);
+            }
+        }
+
+        .btn-parent {
+            background: linear-gradient(135deg, #96CEB4 0%, #FECA57 100%);
+            color: #2C3E50;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.4rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-parent:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Modal Création de Profil ACCESSIBLE */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.9));
+            border-radius: 2rem;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            animation: modalSlideIn 0.5s ease-out;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .modal h3 {
+            color: #2C3E50;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #2C3E50;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #BDC3C7;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2C3E50;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #4ECDC4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+            transform: scale(1.02);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #2C3E50;
+            border: 2px solid #BDC3C7;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* Application principale avec couleurs douces */
+        .app {
+            display: none;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .app.active {
+            display: block;
+            animation: appGentleEntrance 1s ease-out;
+        }
+
+        @keyframes appGentleEntrance {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .header {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-radius: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .app-title {
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #4ECDC4, #FF6B9D, #96CEB4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .dashboard-section {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.4), 
+                rgba(255, 255, 255, 0.2)
+            );
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 2rem;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            animation: sectionGentleFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes sectionGentleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(0.5deg); }
+        }
+
+        .dashboard-section:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: #4ECDC4;
+        }
+
+        .section-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: iconGentlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconGentlePulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(2deg); }
+        }
+
+        .dashboard-section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #2C3E50;
+            font-weight: 700;
+        }
+
+        .dashboard-section p {
+            color: #34495E;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Visualiseur musical doux */
+        .music-visualizer {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 280px;
+            height: 70px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.8));
+            border-radius: 1.5rem;
+            padding: 1rem;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .music-visualizer.active {
+            display: block;
+            animation: visualizerSlideIn 0.6s ease-out;
+        }
+
+        @keyframes visualizerSlideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .visualizer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #2C3E50;
+            font-weight: 600;
+        }
+
+        .music-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .music-note {
+            animation: musicNoteGentle 2s ease-in-out infinite;
+        }
+
+        @keyframes musicNoteGentle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(8deg); }
+        }
+
+        .visualizer-bars {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            height: 25px;
+            gap: 2px;
+        }
+
+        .visualizer-bar {
+            width: 6px;
+            background: linear-gradient(45deg, #FF6B9D, #4ECDC4, #96CEB4, #F7DC6F);
+            border-radius: 3px;
+            min-height: 4px;
+            animation: gentleVisualizerPulse 1.5s ease-in-out infinite;
+        }
+
+        .visualizer-bar:nth-child(1) { animation-delay: 0s; }
+        .visualizer-bar:nth-child(2) { animation-delay: 0.1s; }
+        .visualizer-bar:nth-child(3) { animation-delay: 0.2s; }
+        .visualizer-bar:nth-child(4) { animation-delay: 0.3s; }
+        .visualizer-bar:nth-child(5) { animation-delay: 0.4s; }
+        .visualizer-bar:nth-child(6) { animation-delay: 0.5s; }
+        .visualizer-bar:nth-child(7) { animation-delay: 0.6s; }
+        .visualizer-bar:nth-child(8) { animation-delay: 0.7s; }
+
+        @keyframes gentleVisualizerPulse {
+            0%, 100% { height: 4px; opacity: 0.7; }
+            50% { height: 25px; opacity: 1; }
+        }
+
+        /* Responsive pour enfants */
+        @media (max-width: 768px) {
+            .profiles-grid, .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .profile-welcome h1 {
+                font-size: 2rem;
+            }
+            
+            .splash-title {
+                font-size: 2.2rem;
+            }
+            
+            .robot-container {
+                font-size: 6rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .music-visualizer {
+                width: 220px;
+                height: 60px;
+                bottom: 10px;
+                left: 10px;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .profile-card, .dashboard-section {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splashscreen avec Robot Animé -->
+    <div id="splashscreen" class="splashscreen">
+        <div class="splash-content">
+            <div class="robot-container">
+                🤖
+                <div class="robot-eyes">👀</div>
+            </div>
+            <h1 class="splash-title">EduBot Premium ULTRA</h1>
+            <p class="splash-subtitle">École Numérique pour SIL & CP 🌈✨</p>
+            
+            <!-- Barre de progression centrée -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Préparation de tes leçons magiques... ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sélection de Profil pour SIL & CP -->
+    <div id="profileSelection" class="profile-selection hidden">
+        <div class="container">
+            <div class="profile-welcome">
+                <h1>👋 Bienvenue petit génie !</h1>
+                <p>Choisis ton profil pour commencer l'aventure magique ! 🌟</p>
+            </div>
+            
+            <div class="profiles-grid">
+                <div class="profile-card" onclick="selectProfile('mika')">
+                    <div class="profile-avatar-large">👶</div>
+                    <h3>Mika le Curieux</h3>
+                    <p>4 ans • SIL • Explorateur 🔍</p>
+                    <div class="profile-stats">
+                        <span class="soft-rainbow-text">⭐ 120 points</span>
+                        <span class="soft-rainbow-text">🏅 Niveau 1</span>
+                    </div>
+                </div>
+                
+                <div class="profile-card" onclick="selectProfile('zara')">
+                    <div class="profile-avatar-large">👧</div>
+                    <h3>Zara la Maligne</h3>
+                    <p>6 ans • CP • Championne 🏆</p>
+                    <div class="profile-stats">
+                        <span class="soft-rainbow-text">⭐ 280 points</span>
+                        <span class="soft-rainbow-text">🏅 Niveau 2</span>
+                    </div>
+                </div>
+                
+                <div class="profile-card" onclick="selectProfile('kemi')">
+                    <div class="profile-avatar-large">🧒</div>
+                    <h3>Kemi l'Étoile</h3>
+                    <p>8 ans • CP+ • Super Star ⭐</p>
+                    <div class="profile-stats">
+                        <span class="soft-rainbow-text">⭐ 420 points</span>
+                        <span class="soft-rainbow-text">🏅 Niveau 3</span>
+                    </div>
+                </div>
+                
+                <div class="profile-card new-profile" onclick="createNewProfile()">
+                    <div class="profile-avatar-large">➕</div>
+                    <h3>Crée ton Profil</h3>
+                    <p>Deviens un petit héros ! ✨</p>
+                    <div class="profile-stats">
+                        <span class="soft-rainbow-text">🆕 C'est parti !</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="btn-parent" onclick="openParentSpace()">
+                    👨‍👩‍👧‍👦 Espace Papa & Maman
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Création de Profil ACCESSIBLE -->
+    <div id="newProfileModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>✨ Créer mon Profil Magique ✨</h3>
+            
+            <form id="newProfileForm">
+                <div class="form-group">
+                    <label class="form-label">🎈 Comment tu t'appelles ?</label>
+                    <input type="text" class="form-input" id="childName" placeholder="Mon prénom..." required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🎂 Quel âge as-tu ?</label>
+                    <select class="form-select" id="childAge" required>
+                        <option value="">Choisis ton âge</option>
+                        <option value="4">4 ans 🍼</option>
+                        <option value="5">5 ans 🎈</option>
+                        <option value="6">6 ans 🎨</option>
+                        <option value="7">7 ans 🚀</option>
+                        <option value="8">8 ans 🌟</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📚 Dans quelle classe es-tu ?</label>
+                    <select class="form-select" id="childClass" required>
+                        <option value="">Choisis ta classe</option>
+                        <option value="SIL">SIL (Section d'Initiation au Langage)</option>
+                        <option value="CP">CP (Cours Préparatoire)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">😊 Choisis ton avatar</label>
+                    <select class="form-select" id="childAvatar" required>
+                        <option value="">Mon avatar</option>
+                        <option value="👶">👶 Bébé mignon</option>
+                        <option value="👧">👧 Petite fille</option>
+                        <option value="👦">👦 Petit garçon</option>
+                        <option value="🧒">🧒 Enfant joyeux</option>
+                        <option value="🦸‍♀️">🦸‍♀️ Super héroïne</option>
+                        <option value="🦸‍♂️">🦸‍♂️ Super héros</option>
+                        <option value="🧙‍♀️">🧙‍♀️ Petite sorcière</option>
+                        <option value="🧙‍♂️">🧙‍♂️ Petit magicien</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeNewProfileModal()">
+                        ❌ Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        🎉 Créer mon Profil !
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Principale avec Couleurs Douces -->
+    <div id="mainApp" class="app">
+        <div class="container">
+            <div class="header">
+                <div class="header-content">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <h1 class="app-title">🎓 EduBot SIL & CP</h1>
+                        <div class="profile-info">
+                            <span id="currentAvatar">👶</span>
+                            <span id="currentProfileName">Mon Profil</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <button class="btn btn-outline" onclick="toggleMusic()">
+                            🎵 <span id="musicStatus">Musique</span>
+                        </button>
+                        <button class="btn btn-outline" onclick="toggleTTS()">
+                            🔊 <span id="ttsStatus">Écouter</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="showGeminiChat()">
+                            🤖 Assistant
+                        </button>
+                        <button class="btn btn-outline" onclick="goBack()">
+                            ← Retour
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="dashboard">
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <h2 id="welcomeMessage" class="soft-rainbow-text" style="font-size: 2.2rem; margin-bottom: 1rem;">
+                        🌟 Bienvenue dans ton école magique !
+                    </h2>
+                    <p style="font-size: 1.3rem; color: #34495E; font-weight: 500;">
+                        Apprends en t'amusant avec des couleurs douces et de la musique ! 🎵✨
+                    </p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-section" onclick="showCourses()">
+                        <div class="section-icon">📚</div>
+                        <h3>Mes Petits Cours</h3>
+                        <p>Apprends les chiffres et les lettres avec les animaux du Cameroun ! 🐘🦁</p>
+                    </div>
+                    
+                    <div class="dashboard-section" onclick="showStories()">
+                        <div class="section-icon">📖</div>
+                        <h3>Belles Histoires</h3>
+                        <p>Écoute les contes magiques de nos grand-mères ! 🌙⭐</p>
+                    </div>
+                    
+                    <div class="dashboard-section" onclick="showQuiz()">
+                        <div class="section-icon">🧩</div>
+                        <h3>Quiz Magiques</h3>
+                        <p>Réponds aux questions et gagne des étoiles ! 🌟</p>
+                    </div>
+                    
+                    <div class="dashboard-section" onclick="showDictation()">
+                        <div class="section-icon">✏️</div>
+                        <h3>Dictée Magique</h3>
+                        <p>Écris les mots que je te dis ! 📝✨</p>
+                    </div>
+                    
+                    <div class="dashboard-section" onclick="showGames()">
+                        <div class="section-icon">🎮</div>
+                        <h3>Jeux Magiques</h3>
+                        <p>Joue avec les formes et les couleurs ! 🎨🎪</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visualiseur Musical Doux -->
+    <div id="musicVisualizer" class="music-visualizer">
+        <div class="visualizer-header">
+            <div class="music-status">
+                <span class="music-note">🎵</span>
+                <span id="currentTrackName">Mélodie Douce</span>
+            </div>
+            <div style="font-size: 0.8rem;">
+                Vol: <span id="volumeDisplay">30</span>%
+            </div>
+        </div>
+        <div class="visualizer-bars">
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+        </div>
+    </div>
+
+    <!-- Lecteur Audio avec votre fichier kids_melody.mp3 -->
+    <audio id="backgroundMusic" loop preload="auto" style="display: none;">
+        <source src="kids_melody.mp3" type="audio/mpeg">
+        Ton navigateur ne peut pas jouer la musique magique.
+    </audio>
+
+    <!-- Script JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
