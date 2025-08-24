@@ -1,0 +1,35 @@
+{
+  "name": "EduBot Premium - École Numérique Camerounaise",
+  "short_name": "EduBot",
+  "description": "Application éducative pour enfants SIL & CP du Cameroun",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "background_color": "#E0F7FA",
+  "theme_color": "#00BCD4",
+  "orientation": "portrait-primary",
+  "scope": "./",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "kids", "learning"],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/home.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide"
+    }
+  ]
+}
